@@ -33,7 +33,9 @@ const bootstrap = async (app, express) => {
     await connectDB();
 
 
-
+    app.get("/",(req,res)=>{
+        return res.status(200).json({message:"Welcome To Sara7a App"})
+    })
     app.use("/uploads", express.static(path.resolve("./src/uploads")))
     app.use("/api/auth", authRouter);
     app.use("/api/user", userRouter);
