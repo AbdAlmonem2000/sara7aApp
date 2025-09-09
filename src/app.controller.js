@@ -7,6 +7,7 @@ import cors from "cors";
 import path from "node:path";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
+import { corsOptions } from "./utils/cors/cors.js";
 
 
 
@@ -23,7 +24,7 @@ const bootstrap = async (app, express) => {
     });
 
     app.use(express.json());
-    app.use(cors());
+    app.use(cors(corsOptions()));
     app.use(helmet());
     app.use(limiter);
 
@@ -31,9 +32,7 @@ const bootstrap = async (app, express) => {
 
     await connectDB();
 
-    app.use("/", (req, res, next) => {
-        return res.status(200).json({ message: "welcome to sara7a app" })
-    });
+
 
     app.use("/uploads", express.static(path.resolve("./src/uploads")))
     app.use("/api/auth", authRouter);
