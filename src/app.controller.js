@@ -14,8 +14,8 @@ import { corsOptions } from "./utils/cors/cors.js";
 const bootstrap = async (app, express) => {
 
     const limiter = rateLimit({
-        windowMs: 60 * 1000, // 15 minutes
-        limit: 3,
+        windowMs:15* 60 * 1000, // 15 minutes
+        limit: 100,
         message: {
             statusCode: 429,
             message: "Too many accounts created from this IP, please try again ",
